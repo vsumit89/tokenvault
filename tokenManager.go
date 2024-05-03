@@ -22,7 +22,7 @@ func NewTokenManager(name string, duration *time.Duration, generatorFunc TokenGe
 		duration:               *duration,
 		generatorFunc:          generatorFunc,
 		name:                   name,
-		blockFirstTime:         make(chan bool),
+		blockFirstTime:         make(chan bool, 2), // keeping the size 2 so that only reading is blocked and writing is unblocked
 		hasGeneratedFirstToken: false,
 	}
 
